@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <script src="../firestoreDB.js" type="module"></script> -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+      import { getFirestore, addDoc, doc, collection, getDocs} from "https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js";
+      
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+      apiKey: "AIzaSyCAEx9ZWNgTLh4g4ESYvoXHwrwCmZ-KesU",
+      authDomain: "auth-form-40be6.firebaseapp.com",
+      databaseURL: "https://auth-form-40be6-default-rtdb.firebaseio.com",
+      projectId: "auth-form-40be6",
+      storageBucket: "auth-form-40be6.appspot.com",
+      messagingSenderId: "572384282011",
+      appId: "1:572384282011:web:d5fa9ca84a0c7fd1110d3e"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      // const userPuzzleStart = () => {
+      addDoc(collection(db, "progress"), {
+         uid: localStorage.uid,
+         status: "puzzleHomePage",
+         score: 0
+      });
+      console.log("User Puzzle Started")
+      // }
+      // userPuzzleStart();
+
+      const colRef = collection(db, 'progress')
+      getDocs(colRef)
+         .then((snapshot) => {
+            let progress = []
+            snapshot.docs.forEach((doc) => {
+               progress.push({ ...doc.data(), id: doc.id })
+            })
+            console.log(progress)
+         })
+         .catch((err) =>{
+            console.log(err.message)
+         })
+      
+      
+
+    </script>
+</head>
+<body>
+   <div class="background">
+      <img src="2442.jpg">
+      <div class="icons1">
+         <a href="/maze/index.html"><img src="Asset 1.png"></a>
+      </div>
+      <div class="icons2">
+         <a href="/eLitmus/index.html"><img src="Asset 2.png"></a>
+       </div>
+       <div class="icons3">
+         <a href="/memory game/index.html"><img src="Asset 3.png"></a>
+       </div>
+       <div class="icons4">
+         <a href="/tictactoe/index.html"><img src="Asset 4.png"></a>
+       </div>
+       <div class="icons5">
+         <a href="/number puzzle/"><img src="Asset 5.png"></a>
+       </div>
+       <div class="stickyNote">
+         <img src="Asset 6.png"></a>
+       </div>
+   </div>
+   
+    
+</body>
+</html>
